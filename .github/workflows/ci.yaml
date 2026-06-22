@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [jazzy]
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        ros_distro: [jazzy, kilted]
+    runs-on: ubuntu-latest
+    container: ros:${{ matrix.ros_distro }}-ros-base
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: src/rviz_viewport_control
+      - name: Build and test
+        shell: bash
+        run: |
+          set -e
+          apt-get update
+          rosdep update --include-eol-distros
+          rosdep install --from-paths src --ignore-src -y
+          source /opt/ros/${{ matrix.ros_distro }}/setup.bash
+          colcon build --packages-up-to rviz_viewport_control viewport_control_msgs
+          colcon test --packages-select rviz_viewport_control viewport_control_msgs \
+            --return-code-on-test-failure
+          colcon test-result --verbose

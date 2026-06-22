@@ -1,0 +1,12 @@
+<library path="rviz_viewport_control">
+  <class
+    name="rviz_viewport_control/ViewportControl"
+    type="rviz_viewport_control::ViewportViewController"
+    base_class_type="rviz_common::ViewController">
+    <description>
+      View controller exposing the rviz camera over the viewport_control_msgs ROS
+      surface (set_view, set_reference_frame, set_projection, cmd_view stream), with
+      smooth time-buffered interpolation and manual mouse override.
+    </description>
+  </class>
+</library>
