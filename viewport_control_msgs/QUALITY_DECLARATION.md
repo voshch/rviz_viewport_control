@@ -32,7 +32,7 @@ A formal confirmation of contributor origin (e.g. DCO) is not enforced. This is 
 A formal peer-review policy is not enforced (single maintainer). This is not required at Quality Level 3.
 
 ### Continuous Integration [2.iv]
-All pull requests are built and tested by GitHub Actions (`.github/workflows/ci.yaml`) on the `jazzy` and `kilted` distributions. The `lyrical` distribution is tracked on the `lyrical` branch.
+All pull requests are built and tested by GitHub Actions (`.github/workflows/ci.yaml`) on the `lyrical` distribution. The `jazzy` and `kilted` distributions are tracked on the `jazzy` branch.
 
 ### Documentation Policy [2.v]
 Changes affecting the public API are reflected in the `README.md` and in the message and service field comments.
@@ -65,7 +65,7 @@ Quality Level 3 imposes no testing requirement. A schema-guard gtest (`test/test
 None.
 
 ## Platform Support [6]
-`viewport_control_msgs` targets the Tier 1 platforms of its ROS distributions (Ubuntu 24.04 Noble), verified in CI for `jazzy` and `kilted`.
+`viewport_control_msgs` targets the Tier 1 platforms of its ROS distributions (Ubuntu 24.04 Noble), verified in CI for `lyrical`.
 
 ## Security [7]
 

@@ -33,6 +33,7 @@
 #include <QEvent>
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <cstddef>
 
@@ -294,7 +295,7 @@ bool ViewportViewController::sampleBuffer(
   return true;
 }
 
-void ViewportViewController::update(float dt, float ros_dt)
+void ViewportViewController::update(std::chrono::nanoseconds dt, std::chrono::nanoseconds ros_dt)
 {
   // Base resolves the target frame onto target_scene_node_ (reference_position_ and
   // reference_orientation_), so the camera scene node lives in reference-local coords.
@@ -325,7 +326,7 @@ void ViewportViewController::update(float dt, float ros_dt)
 
   if (camera_) {
     applyProjection();
-    applyToCamera(ros_dt);
+    applyToCamera(std::chrono::duration<float>(ros_dt).count());
   }
 }
 

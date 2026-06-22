@@ -31,6 +31,7 @@
 #ifndef RVIZ_VIEWPORT_CONTROL__VIEWPORT_VIEW_CONTROLLER_HPP_
 #define RVIZ_VIEWPORT_CONTROL__VIEWPORT_VIEW_CONTROLLER_HPP_
 
+#include <chrono>
 #include <deque>
 #include <memory>
 #include <mutex>
@@ -91,7 +92,7 @@ public:
 
   void onInitialize() override;
   void reset() override;
-  void update(float dt, float ros_dt) override;
+  void update(std::chrono::nanoseconds dt, std::chrono::nanoseconds ros_dt) override;
   void lookAt(const Ogre::Vector3 & point) override;
   void handleMouseEvent(rviz_common::ViewportMouseEvent & event) override;
 

@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [jazzy]
+    branches: [lyrical]
   pull_request:
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ros_distro: [jazzy, kilted]
+        ros_distro: [lyrical]
     runs-on: ubuntu-latest
     container: ros:${{ matrix.ros_distro }}-ros-base
     steps:
