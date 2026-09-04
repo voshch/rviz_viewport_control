@@ -208,10 +208,10 @@ void ViewportViewController::setupRos()
       res->message = "ok";
     });
 
-  // Deep queue: every keyframe must reach the buffer, not just the latest one.
+  // Shallow queue: the newest keyframe is the only one worth having.
   view_sub_ = node_->create_subscription<ViewportView>(
     "viewport/cmd_view",
-    rclcpp::QoS(rclcpp::KeepLast(64)).best_effort(),
+    rclcpp::QoS(rclcpp::KeepLast(2)).best_effort(),
     [this](const ViewportView::SharedPtr msg) {
       Keyframe kf;
       // target_time is wall time from the cam, so tag and compare on the system clock.
@@ -471,7 +471,8 @@ void ViewportViewController::publishPose()
     return;
   }
   const Ogre::Vector3 pos = camera_->getDerivedPosition();
-  const Ogre::Quaternion rot = camera_->getDerivedOrientation();
+  // Ogre aims cameras along -Z, the contract is body convention.
+  const Ogre::Quaternion rot = lookAtOrientation(pos, pos + camera_->getDerivedDirection());
   geometry_msgs::msg::PoseStamped msg;
   msg.header.stamp = node_->now();
   msg.header.frame_id = context_->getFixedFrame().toStdString();
