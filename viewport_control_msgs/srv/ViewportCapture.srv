@@ -2,6 +2,7 @@
 geometry_msgs/Pose pose   # camera pose in the current reference frame
 bool world_orientation    # true keeps the aim world-stable, false rotates it with the reference
 float64 fov               # horizontal field of view, radians; <= 0 leaves it unchanged
+builtin_interfaces/Time min_sim_time   # defer capture until sim time reaches this; zero = no constraint
 ---
 bool success
 string message
